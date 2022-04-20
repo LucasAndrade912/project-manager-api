@@ -29,4 +29,8 @@ export class MemoryProjectRepository implements IProjectRepository {
     
 		return project
 	}
+
+	async findAllProjects(): Promise<IProject[]> {
+		return this.projects
+	}
 }
