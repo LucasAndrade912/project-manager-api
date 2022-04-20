@@ -1,3 +1,4 @@
+import { ITag } from '../Tag/ITag'
 import { ITask } from '../Task/ITask'
 
 export interface IProject {
@@ -6,4 +7,5 @@ export interface IProject {
   image: string,
   status: 'to-do' | 'in-progress' | 'done'
   tasks: ITask[]
+  tags: ITag[]
 }

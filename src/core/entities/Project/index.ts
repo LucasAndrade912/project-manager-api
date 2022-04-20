@@ -16,5 +16,6 @@ export class Project {
 		this.image = props.image
 		this.status = props.status
 		this.tasks = props.tasks
+		this.tags = props.tags
 	}
 }
