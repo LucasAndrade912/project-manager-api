@@ -1,3 +1,4 @@
+import { IProjectRepository } from '../../infra/repositories/ProjectRepository/IProjectRepository'
 import { Project } from '../entities/Project'
 import { ITag } from '../entities/Tag/ITag'
 import { ITask } from '../entities/Task/ITask'
@@ -11,8 +12,14 @@ interface CreateProjectProps {
 }
 
 export class CreateProject {
-	exec(props: CreateProjectProps) {
-		const project = new Project({
+	private repository: IProjectRepository
+
+	constructor(repository: IProjectRepository) {
+		this.repository = repository
+	}
+
+	async exec(props: CreateProjectProps) {
+		const newProject = new Project({
 			status: 'to-do',
 			title: props.title,
 			description: props.description,
@@ -20,6 +27,8 @@ export class CreateProject {
 			tags: props.tags,
 			tasks: props.tasks
 		})
+
+		const project = await this.repository.createProject(newProject)
 
 		return project
 	}
