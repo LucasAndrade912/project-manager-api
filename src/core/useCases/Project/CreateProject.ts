@@ -1,7 +1,7 @@
-import { IProjectRepository } from '../../infra/repositories/ProjectRepository/IProjectRepository'
-import { Project } from '../entities/Project'
-import { ITag } from '../entities/Tag/ITag'
-import { ITask } from '../entities/Task/ITask'
+import { IProjectRepository } from '../../../infra/repositories/ProjectRepository/IProjectRepository'
+import { Project } from '../../entities/Project'
+import { ITag } from '../../entities/Tag/ITag'
+import { ITask } from '../../entities/Task/ITask'
 
 interface CreateProjectProps {
   title: string,
