@@ -1,5 +1,5 @@
 import { IProject } from '../../../core/entities/Project/IProject'
-import { IProjectRepository } from './IProjectRepository'
+import { IProjectRepository, IUpdateProjectProps } from './IProjectRepository'
 
 export class MemoryProjectRepository implements IProjectRepository {
 	private projects: IProject[] = [
@@ -32,5 +32,19 @@ export class MemoryProjectRepository implements IProjectRepository {
 
 	async findAllProjects(): Promise<IProject[]> {
 		return this.projects
+	}
+
+	async updateProject(id: number, changes: IUpdateProjectProps): Promise<IProject> {
+		const updatedProjects = this.projects.map((project, index) => {
+			if (index + 1 === id) {
+				return { ...project, ...changes }
+			} else {
+				return { ...project }
+			}
+		})
+
+		this.projects = updatedProjects
+
+		return this.projects[id - 1]
 	}
 }
