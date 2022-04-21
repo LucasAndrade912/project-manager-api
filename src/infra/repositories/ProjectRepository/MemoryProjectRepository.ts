@@ -47,4 +47,8 @@ export class MemoryProjectRepository implements IProjectRepository {
 
 		return this.projects[id - 1]
 	}
+
+	async deleteProject(id: number): Promise<void> {
+		this.projects = this.projects.filter((_, idx) => id !== (idx + 1))
+	}
 }

@@ -15,4 +15,5 @@ export interface IProjectRepository {
   createProject(project: IProject): Promise<IProject>
   findAllProjects(): Promise<IProject[]>
   updateProject(id: number, changes: IUpdateProjectProps): Promise<IProject>
+  deleteProject(id: number): Promise<void>
 }
