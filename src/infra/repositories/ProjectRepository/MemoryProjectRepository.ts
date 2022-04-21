@@ -34,6 +34,10 @@ export class MemoryProjectRepository implements IProjectRepository {
 		return this.projects
 	}
 
+	async findProjectById(id: number): Promise<IProject> {
+		return this.projects[id - 1]
+	}
+
 	async updateProject(id: number, changes: IUpdateProjectProps): Promise<IProject> {
 		const updatedProjects = this.projects.map((project, index) => {
 			if (index + 1 === id) {
