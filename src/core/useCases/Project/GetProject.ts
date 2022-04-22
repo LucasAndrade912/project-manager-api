@@ -1,4 +1,4 @@
-import { IProjectRepository } from '../../infra/repositories/ProjectRepository/IProjectRepository'
+import { IProjectRepository } from '../../../infra/repositories/ProjectRepository/IProjectRepository'
 
 export class GetProject {
 	private repository: IProjectRepository

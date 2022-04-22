@@ -1,4 +1,4 @@
-import { IProjectRepository, IUpdateProjectProps } from '../../infra/repositories/ProjectRepository/IProjectRepository'
+import { IProjectRepository, IUpdateProjectProps } from '../../../infra/repositories/ProjectRepository/IProjectRepository'
 
 export class UpdateProject {
 	private repository: IProjectRepository
