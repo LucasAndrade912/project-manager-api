@@ -8,7 +8,7 @@ export class GetAllTags {
 	}
 
 	async exec() {
-		const tags = await this.repository.getAllTags()
+		const tags = await this.repository.findAllTags()
 
 		return tags
 	}

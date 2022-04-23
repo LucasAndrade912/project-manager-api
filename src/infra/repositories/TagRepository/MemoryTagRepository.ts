@@ -13,7 +13,7 @@ export class MemoryTagRepository implements ITagRepository {
 		return this.tags[tag - 1]
 	}
 
-	async getAllTags(): Promise<ITag[]> {
+	async findAllTags(): Promise<ITag[]> {
 		return this.tags
 	}
 

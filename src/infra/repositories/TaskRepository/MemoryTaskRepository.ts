@@ -24,7 +24,7 @@ export class MemoryTaskRepository implements ITaskRepository {
 		return this.tasks[id - 1]
 	}
 
-	async getAllTasks(): Promise<ITask[]> {
+	async findAllTasks(): Promise<ITask[]> {
 		return this.tasks
 	}
 }

@@ -8,7 +8,7 @@ export class GetAllTasks {
 	}
 
 	async exec() {
-		const tasks = await this.repository.getAllTasks()
+		const tasks = await this.repository.findAllTasks()
 
 		return tasks
 	}
