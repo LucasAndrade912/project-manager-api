@@ -16,6 +16,10 @@ export class CreateProject {
 	}
 
 	async exec(props: CreateProjectProps) {
+		if (!props.title) {
+			throw new Error('Title cannot be empty')
+		}
+
 		const newProject = new Project({
 			status: 'to-do',
 			title: props.title,
