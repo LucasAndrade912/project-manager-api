@@ -1,4 +1,5 @@
 import { IUserRepository } from '../../../infra/repositories/UserRepository/IUserRepository'
+import { User } from '../../entities/User'
 
 export class CreateUser {
 	private repository: IUserRepository
@@ -14,7 +15,8 @@ export class CreateUser {
 			throw new Error('User already registered')
 		}
 
-		const newUser = await this.repository.createUser(id)
+		const newUser = new User({ id })
+		await this.repository.createUser(newUser.id)
 
 		return newUser
 	}
