@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:../dev.db"
+}
+
+model User {
+  id String @id @default(uuid())
+
+  created_at DateTime @default(now())
+
+  projects Project[]
+
+  @@map("users")
+}
+
+model Project {
+  id          String  @id @default(uuid())
+  title       String
+  description String?
+  image       String?
+  status      String?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  tasks Task[]
+  tags  Tag[]
+
+  user_id String?
+  user    User?   @relation(fields: [user_id], references: [id])
+
+  @@map("projects")
+}
+
+model Task {
+  id        Int     @id @default(autoincrement())
+  task_name String
+  finished  Boolean
+
+  project_id String?
+  projects   Project? @relation(fields: [project_id], references: [id])
+
+  @@map("tasks")
+}
+
+model Tag {
+  id       Int    @id @default(autoincrement())
+  tag_name String
+
+  color_id Int
+  color    Color @relation(fields: [color_id], references: [id])
+
+  projects Project[]
+
+  @@map("tags")
+}
+
+model Color {
+  id         Int    @id @default(autoincrement())
+  color_name String @unique
+
+  tags Tag[]
+
+  @@map("colors")
+}
