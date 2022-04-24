@@ -2,7 +2,7 @@ import { IProject } from '../Project/IProject'
 import { IUser } from './IUser'
 
 export class User {
-	private id: string
+	public readonly id: string
 	public projects: IProject[]
 
 	constructor(props: IUser) {
