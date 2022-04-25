@@ -8,7 +8,7 @@ export class GetUser {
 	}
 
 	async exec(id: string) {
-		const user = this.repository.findUserById(id)
+		const user = await this.repository.findUserById(id)
 
 		return user
 	}
