@@ -3,7 +3,7 @@ import { IUser } from '../../../core/entities/User/IUser'
 import { prisma } from '../prisma/prismaClient'
 import { IUserRepository } from './IUserRepository'
 
-export class SqlRepository implements IUserRepository<User> {
+export class SqlUserRepository implements IUserRepository<User> {
 	async createUser(id: string): Promise<IUser> {
 		const user = await prisma.user.create({ data: { id } })
 
