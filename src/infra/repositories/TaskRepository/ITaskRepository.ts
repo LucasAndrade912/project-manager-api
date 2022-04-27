@@ -1,7 +1,11 @@
 import { ITask } from '../../../core/entities/Task/ITask'
 
-export interface ITaskRepository {
-  createTask(task: ITask): Promise<ITask>
-  updateTask(id: number, task: { taskName?: string, finished?: boolean }): Promise<ITask>
-  findAllTasks(): Promise<ITask[]>
+export interface TaskProps {
+  taskName?: string
+  finished?: boolean
+}
+
+export interface ITaskRepository<T = ITask> {
+  createTask(newTask: ITask, idProject: string): Promise<T>
+  updateTask(idTask: number, task: TaskProps): Promise<T>
 }
