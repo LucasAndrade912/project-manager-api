@@ -1,11 +1,11 @@
 import { ITask } from './ITask'
 
 export class Task {
-	public task: string
+	public task_name: string
 	public finished: boolean
 
 	constructor(props: ITask) {
-		this.task = props.task
+		this.task_name = props.task_name
 		this.finished = props.finished
 	}
 }

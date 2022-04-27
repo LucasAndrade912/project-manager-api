@@ -1,4 +1,4 @@
 export interface ITask {
-  task: string
+  task_name: string
   finished: boolean
 }
