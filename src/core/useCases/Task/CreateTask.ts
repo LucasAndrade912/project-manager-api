@@ -8,14 +8,14 @@ export class CreateTask {
 		this.repository = repository
 	}
 
-	async exec(taskName: string) {
+	async exec(taskName: string, idProject: string) {
 		if (!taskName) {
 			throw new Error('Task name cannot be empty')
 		}
 
-		const newTask = new Task({ task: taskName, finished: false })
+		const newTask = new Task({ task_name: taskName, finished: false })
 
-		const task = await this.repository.createTask(newTask)
+		const task = await this.repository.createTask(newTask, idProject)
 
 		return task
 	}
