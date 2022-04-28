@@ -7,13 +7,13 @@ export class DeleteProject {
 		this.repository = repository
 	}
 
-	async exec(id: number) {
-		const project = await this.repository.findProjectById(id)
+	async exec(idProject: string, idUser: string) {
+		const project = await this.repository.findProjectById(idProject, idUser)
 
 		if (!project) {
 			throw new Error('This project not exists')
 		}
 		
-		await this.repository.deleteProject(id)
+		await this.repository.deleteProject(idProject)
 	}
 }
