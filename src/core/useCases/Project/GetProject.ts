@@ -7,8 +7,8 @@ export class GetProject {
 		this.repository = repository
 	}
 
-	async exec(id: number) {
-		const project = await this.repository.findProjectById(id)
+	async exec(idProject: string, idUser: string) {
+		const project = await this.repository.findProjectById(idProject, idUser)
 
 		return project
 	}
