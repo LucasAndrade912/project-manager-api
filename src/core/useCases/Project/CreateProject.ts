@@ -1,11 +1,10 @@
 import { IProjectRepository } from '../../../infra/repositories/ProjectRepository/IProjectRepository'
 import { Project } from '../../entities/Project'
-import { ITag } from '../../entities/Tag/ITag'
 
 interface CreateProjectProps {
-  title: string,
-  description?: string,
-  tags?: ITag[],
+  title: string
+  description?: string
+  idTags?: number[]
 }
 
 export class CreateProject {
@@ -15,19 +14,23 @@ export class CreateProject {
 		this.repository = repository
 	}
 
-	async exec(props: CreateProjectProps) {
-		if (!props.title) {
+	async exec(newProject: CreateProjectProps, idUser: string) {
+		if (!newProject.title) {
 			throw new Error('Title cannot be empty')
 		}
 
-		const newProject = new Project({
+		const { title, description, status } = new Project({
 			status: 'to-do',
-			title: props.title,
-			description: props.description,
-			tags: props.tags,
+			title: newProject.title,
+			description: newProject.description
 		})
 
-		const project = await this.repository.createProject(newProject)
+		const project = await this.repository.createProject({
+			title,
+			description,
+			status,
+			idTags: newProject.idTags
+		}, idUser)
 
 		return project
 	}
