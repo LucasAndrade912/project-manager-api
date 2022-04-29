@@ -12,7 +12,7 @@ export class CreateUser {
 		const user = await this.repository.findUserById(id)
 
 		if (user) {
-			throw new Error('User already registered')
+			return user
 		}
 
 		const newUser = new User({ id })
