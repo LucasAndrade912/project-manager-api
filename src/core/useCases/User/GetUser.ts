@@ -8,6 +8,10 @@ export class GetUser {
 	}
 
 	async exec(id: string) {
+		if (!id) {
+			throw new Error('Id is required')
+		}
+
 		const user = await this.repository.findUserById(id)
 
 		return user
