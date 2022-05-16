@@ -6,7 +6,7 @@ export class Project {
 	public title: string
 	public description?: string
 	public image?: string
-	public status: string | 'to-do' | 'in-progress' | 'done'
+	public status: 'to-do' | 'in-progress' | 'done'
 	public tasks?: ITask[]
 	public tags?: ITag[]
 

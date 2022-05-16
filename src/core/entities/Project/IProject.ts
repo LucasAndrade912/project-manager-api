@@ -5,7 +5,7 @@ export interface IProject {
   title: string,
   description?: string,
   image?: string,
-  status: string | 'to-do' | 'in-progress' | 'done'
+  status: 'to-do' | 'in-progress' | 'done'
   tasks?: ITask[]
   tags?: ITag[]
 }
