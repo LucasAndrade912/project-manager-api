@@ -8,6 +8,10 @@ export class GetAllProjects {
 	}
 
 	async exec(idUser: string) {
+		if (!idUser) {
+			throw new Error('User id is required')
+		}
+
 		const allProjects = await this.repository.findAllProjects(idUser)
 
 		return allProjects
