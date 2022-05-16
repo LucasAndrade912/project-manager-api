@@ -1,19 +1,18 @@
-import { Project } from '@prisma/client'
 import { prisma } from '../prisma/prismaClient'
-import { CreateProjectProps, IProjectRepository, UpdateProjectProps } from './IProjectRepository'
+import { IProjectRepository, ProjectCreateData, ProjectFindData, ProjectUpdateData } from './IProjectRepository'
 
-export class SqlProjectRepository implements IProjectRepository<Project> {
-	async createProject(newProject: CreateProjectProps, idUser: string): Promise<Project> {
-		const tagConnections = newProject.idTags.map(idTag => {
+export class SqlProjectRepository implements IProjectRepository {
+	async createProject(data: ProjectCreateData, idUser: string) {
+		const tagConnections = data.idTags.map(idTag => {
 			return { id: idTag }
 		})
 
-		const project = await prisma.project.create({
+		await prisma.project.create({
 			data: {
-				title: newProject.title,
-				description: newProject.description,
-				image: newProject.image,
-				status: newProject.status,
+				title: data.title,
+				description: data.description,
+				image: data.image,
+				status: data.status,
 				tags: {
 					connect: tagConnections
 				},
@@ -24,21 +23,19 @@ export class SqlProjectRepository implements IProjectRepository<Project> {
 				}
 			}
 		})
-
-		return project
 	}
   
-	async findAllProjects(idUser: string): Promise<Project[]> {
+	async findAllProjects(idUser: string) {
 		const projects = await prisma.project.findMany({
 			where: {
 				user_id: idUser
 			}
 		})
 
-		return projects
+		return projects as ProjectFindData[]
 	}
 
-	async findProjectById(idProject: string, idUser: string): Promise<Project> {
+	async findProjectById(idProject: string, idUser: string) {
 		const project = await prisma.project.findFirst({
 			where: {
 				AND: {
@@ -48,10 +45,10 @@ export class SqlProjectRepository implements IProjectRepository<Project> {
 			}
 		})
 
-		return project
+		return project as ProjectFindData
 	}
 
-	async updateProject(idProject: string, changes: UpdateProjectProps): Promise<Project> {
+	async updateProject(idProject: string, changes: ProjectUpdateData) {
 		const tagConnections = changes.connectTags?.map(tag => {
 			return { id: tag }
 		})
@@ -60,7 +57,7 @@ export class SqlProjectRepository implements IProjectRepository<Project> {
 			return { id: tag }
 		})
 
-		const updatedProject = await prisma.project.update({
+		await prisma.project.update({
 			where: {
 				id: idProject
 			},
@@ -75,11 +72,9 @@ export class SqlProjectRepository implements IProjectRepository<Project> {
 				}
 			}
 		})
-
-		return updatedProject
 	}
 
-	async deleteProject(idProject: string): Promise<void> {
+	async deleteProject(idProject: string) {
 		await prisma.project.delete({
 			where: {
 				id: idProject
