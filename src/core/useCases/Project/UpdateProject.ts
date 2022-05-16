@@ -1,4 +1,4 @@
-import { IProjectRepository, UpdateProjectProps } from '../../../infra/repositories/ProjectRepository/IProjectRepository'
+import { IProjectRepository, ProjectUpdateData } from '../../../infra/repositories/ProjectRepository/IProjectRepository'
 
 export class UpdateProject {
 	private repository: IProjectRepository
@@ -7,15 +7,13 @@ export class UpdateProject {
 		this.repository = repository
 	}
 
-	async exec(idProject: string, idUser: string, props: UpdateProjectProps) {
+	async exec(idProject: string, idUser: string, props: ProjectUpdateData) {
 		const project = await this.repository.findProjectById(idProject, idUser)
 
 		if (!project) {
 			throw new Error('This project not exists')
 		}
 
-		const updatedProject = await this.repository.updateProject(idProject, props)
-
-		return updatedProject
+		await this.repository.updateProject(idProject, props)
 	}
 }

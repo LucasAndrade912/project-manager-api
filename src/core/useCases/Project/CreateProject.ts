@@ -1,7 +1,7 @@
 import { IProjectRepository } from '../../../infra/repositories/ProjectRepository/IProjectRepository'
 import { Project } from '../../entities/Project'
 
-interface CreateProjectProps {
+interface ProjectCreateData {
   title: string
   description?: string
   idTags?: number[]
@@ -14,24 +14,22 @@ export class CreateProject {
 		this.repository = repository
 	}
 
-	async exec(newProject: CreateProjectProps, idUser: string) {
-		if (!newProject.title) {
+	async exec(data: ProjectCreateData, idUser: string) {
+		if (!data.title) {
 			throw new Error('Title cannot be empty')
 		}
 
 		const { title, description, status } = new Project({
 			status: 'to-do',
-			title: newProject.title,
-			description: newProject.description
+			title: data.title,
+			description: data.description
 		})
 
-		const project = await this.repository.createProject({
+		await this.repository.createProject({
 			title,
 			description,
 			status,
-			idTags: newProject.idTags
+			idTags: data.idTags
 		}, idUser)
-
-		return project
 	}
 }
