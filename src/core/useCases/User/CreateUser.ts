@@ -9,15 +9,11 @@ export class CreateUser {
 	}
 
 	async exec(id: string) {
-		const user = await this.repository.findUserById(id)
-
-		if (user) {
-			return user
+		if (!id) {
+			throw new Error('Id is required')
 		}
 
 		const newUser = new User({ id })
 		await this.repository.createUser(newUser.id)
-
-		return newUser
 	}
 }
