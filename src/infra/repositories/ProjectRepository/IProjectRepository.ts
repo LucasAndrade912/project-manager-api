@@ -21,8 +21,8 @@ export interface ProjectUpdateData {
   status?: 'to-do' | 'in-progress' | 'done'
   description?: string
   image?: string
-  connectTags: number[]
-  disconnectTags: number[]
+  connectTags?: number[]
+  disconnectTags?: number[]
 }
 
 export interface IProjectRepository {
