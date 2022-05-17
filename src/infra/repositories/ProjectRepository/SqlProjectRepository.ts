@@ -36,11 +36,35 @@ export class SqlProjectRepository implements IProjectRepository {
 	}
 
 	async findProjectById(idProject: string, idUser: string) {
-		const project = await prisma.project.findFirst({
+		const { user_id, ...project } = await prisma.project.findFirst({
 			where: {
 				AND: {
 					id: idProject,
 					user_id: idUser
+				}
+			},
+			include: {
+				tasks: {
+					select: {
+						id: false,
+						project_id: false,
+						task_name: true,
+						finished: true,
+						projects: false
+					}
+				},
+				tags: {
+					select: {
+						id: false,
+						tag_name: true,
+						color_id: false,
+						color: {
+							select: {
+								id: false,
+								color_name: true
+							}
+						}
+					}
 				}
 			}
 		})
