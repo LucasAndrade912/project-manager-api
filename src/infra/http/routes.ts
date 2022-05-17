@@ -1,8 +1,11 @@
 import { Router } from 'express'
-import { GetAllProjectsController } from './controllers/Project/GetAllProjectsController'
-import { GetProjectController } from './controllers/Project/GetProjectController'
+
 import { AuthMiddleware } from './middlewares/AuthMiddleware'
 import { HandleUserMiddleware } from './middlewares/HandleUserMiddleware'
+
+import { CreateProjectController } from './controllers/Project/CreateProjectController'
+import { GetAllProjectsController } from './controllers/Project/GetAllProjectsController'
+import { GetProjectController } from './controllers/Project/GetProjectController'
 
 const routes = Router()
 
@@ -18,6 +21,13 @@ routes.get(
 	AuthMiddleware.authenticate,
 	HandleUserMiddleware.handle,
 	GetProjectController.handle
+)
+
+routes.post(
+	'/projects',
+	AuthMiddleware.authenticate,
+	HandleUserMiddleware.handle,
+	CreateProjectController.handle
 )
 
 export { routes }
