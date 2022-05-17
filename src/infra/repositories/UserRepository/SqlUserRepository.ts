@@ -7,7 +7,7 @@ export class SqlUserRepository implements IUserRepository {
 	}
 
 	async findUserById(id: string) {
-		const user = await prisma.user.findFirst({
+		const user = await prisma.user.findUnique({
 			where: { id },
 			select: {
 				id: true,
