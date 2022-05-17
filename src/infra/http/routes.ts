@@ -7,6 +7,7 @@ import { CreateProjectController } from './controllers/Project/CreateProjectCont
 import { GetAllProjectsController } from './controllers/Project/GetAllProjectsController'
 import { GetProjectController } from './controllers/Project/GetProjectController'
 import { UpdateProjectController } from './controllers/Project/UpdateProjectController'
+import { DeleteProjectController } from './controllers/Project/DeleteProjectController'
 
 const routes = Router()
 
@@ -36,6 +37,13 @@ routes.put(
 	AuthMiddleware.authenticate,
 	HandleUserMiddleware.handle,
 	UpdateProjectController.handle
+)
+
+routes.delete(
+	'/projects/:idProject',
+	AuthMiddleware.authenticate,
+	HandleUserMiddleware.handle,
+	DeleteProjectController.handle
 )
 
 export { routes }
