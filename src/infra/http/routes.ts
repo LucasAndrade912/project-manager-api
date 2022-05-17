@@ -6,6 +6,7 @@ import { HandleUserMiddleware } from './middlewares/HandleUserMiddleware'
 import { CreateProjectController } from './controllers/Project/CreateProjectController'
 import { GetAllProjectsController } from './controllers/Project/GetAllProjectsController'
 import { GetProjectController } from './controllers/Project/GetProjectController'
+import { UpdateProjectController } from './controllers/Project/UpdateProjectController'
 
 const routes = Router()
 
@@ -28,6 +29,13 @@ routes.post(
 	AuthMiddleware.authenticate,
 	HandleUserMiddleware.handle,
 	CreateProjectController.handle
+)
+
+routes.put(
+	'/projects',
+	AuthMiddleware.authenticate,
+	HandleUserMiddleware.handle,
+	UpdateProjectController.handle
 )
 
 export { routes }
