@@ -8,6 +8,10 @@ export class DeleteUser {
 	}
 
 	async exec(id: string) {
+		if (!id) {
+			throw new Error('Id is required')
+		}
+
 		await this.repository.deleteUser(id)
 	}
 }
