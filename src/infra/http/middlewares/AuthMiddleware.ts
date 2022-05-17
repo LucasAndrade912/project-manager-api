@@ -12,9 +12,9 @@ export class AuthMiddleware {
 			req.uid = uid
 
 			next()
-		} catch (error) {
-			console.log(error)
-			return res.status(401)
+		} catch (err) {
+			console.log(err)
+			return res.status(401).json({ error: 'Invalid token' })
 		}
 	}
 }

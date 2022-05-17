@@ -13,7 +13,8 @@ export class GetAllProjectsController {
 		
 			return res.status(200).json({ projects })
 		} catch (err) {
-			return res.status(400).json({ error: err })
+			console.log(err)
+			return res.status(500).send()
 		}
 	}
 }
