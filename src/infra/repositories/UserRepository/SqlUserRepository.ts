@@ -16,7 +16,11 @@ export class SqlUserRepository implements IUserRepository {
 			}
 		})
 
-		return user.id
+		if (user) {
+			return user.id
+		}
+
+		return null
 	}
 
 	async deleteUser(id: string) {
