@@ -6,6 +6,16 @@ export interface ProjectCreateData {
   idTags: number[]
 }
 
+interface TagData {
+  tag_name: string
+  color: { color_name: string }
+}
+
+interface TaskData {
+  task_name: string
+  finished: boolean
+}
+
 export interface ProjectFindData {
   id: string
   title: string
@@ -14,6 +24,8 @@ export interface ProjectFindData {
   image?: string
   created_at: Date
   updated_at?: Date
+  tags?: TagData[]
+  tasks?: TaskData[]
 }
 
 export interface ProjectUpdateData {

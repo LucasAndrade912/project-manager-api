@@ -29,6 +29,36 @@ export class SqlProjectRepository implements IProjectRepository {
 		const projects = await prisma.project.findMany({
 			where: {
 				user_id: idUser
+			},
+			select: {
+				id: true,
+				title: true,
+				description: true,
+				image: true,
+				status: true,
+				created_at: true,
+				updated_at: true,
+				user_id: false,
+				tags: {
+					select: {
+						id: false,
+						tag_name: true,
+						color: {
+							select: {
+								id: false,
+								color_name: true
+							}
+						}
+					}
+				},
+				tasks: {
+					select: {
+						id: true,
+						task_name: true,
+						finished: true,
+						project_id: false
+					}
+				}
 			}
 		})
 
