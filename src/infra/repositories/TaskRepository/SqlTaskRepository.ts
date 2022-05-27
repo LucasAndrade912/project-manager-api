@@ -1,14 +1,12 @@
-import { Task } from '@prisma/client'
-import { ITask } from '../../../core/entities/Task/ITask'
 import { prisma } from '../prisma/prismaClient'
-import { ITaskRepository, TaskProps } from './ITaskRepository'
+import { ITaskRepository } from './ITaskRepository'
 
-export class SqlTaskRepository implements ITaskRepository<Task> {
-	async createTask(newTask: ITask, idProject: string): Promise<Task> {
-		const task = await prisma.task.create({
+export class SqlTaskRepository implements ITaskRepository {
+	async createTask(taskName: string, idProject: string) {
+		await prisma.task.create({
 			data: {
-				task_name: newTask.task_name,
-				finished: newTask.finished,
+				task_name: taskName,
+				finished: false,
 				projects: {
 					connect: {
 						id: idProject
@@ -16,19 +14,19 @@ export class SqlTaskRepository implements ITaskRepository<Task> {
 				}
 			}
 		})
-
-		return task
 	}
 
-	async updateTask(idTask: number, task: TaskProps): Promise<Task> {
-		const updatedTask = await prisma.task.update({
-			where: { id: idTask },
+	async updateTask(idProject: string, idTask: number, finished: boolean) {
+		await prisma.project.update({
+			where: { id: idProject },
 			data: {
-				task_name: task.taskName,
-				finished: task.finished
+				tasks: {
+					update: {
+						where: { id: idTask },
+						data: { finished }
+					}
+				}
 			}
 		})
-
-		return updatedTask
 	}
 }

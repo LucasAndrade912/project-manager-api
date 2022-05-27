@@ -9,8 +9,11 @@ import { GetProjectController } from './controllers/Project/GetProjectController
 import { UpdateProjectController } from './controllers/Project/UpdateProjectController'
 import { DeleteProjectController } from './controllers/Project/DeleteProjectController'
 
+import { UpdateTaskController } from './controllers/Task/UpdateTaskController'
+
 const routes = Router()
 
+// Projects
 routes.get(
 	'/projects',
 	AuthMiddleware.authenticate,
@@ -44,6 +47,14 @@ routes.delete(
 	AuthMiddleware.authenticate,
 	HandleUserMiddleware.handle,
 	DeleteProjectController.handle
+)
+
+// Tasks
+routes.put(
+	'/tasks',
+	AuthMiddleware.authenticate,
+	HandleUserMiddleware.handle,
+	UpdateTaskController.handle
 )
 
 export { routes }

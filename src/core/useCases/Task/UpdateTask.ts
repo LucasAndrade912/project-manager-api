@@ -7,12 +7,7 @@ export class UpdateTask {
 		this.repository = repository
 	}
 
-	async exec(id: number, task: { taskName?: string, finished?: boolean }) {
-		const updatedTask = await this.repository.updateTask(id, {
-			taskName: task.taskName,
-			finished: task.finished
-		})
-
-		return updatedTask
+	async exec(idProject: string, idTask: number, finished: boolean) {
+		await this.repository.updateTask(idProject, idTask, finished)
 	}
 }
