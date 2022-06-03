@@ -11,6 +11,8 @@ import { DeleteProjectController } from './controllers/Project/DeleteProjectCont
 
 import { UpdateTaskController } from './controllers/Task/UpdateTaskController'
 
+import { GetAllTagsController } from './controllers/Tag/GetAllTagsController'
+
 const routes = Router()
 
 // Projects
@@ -55,6 +57,14 @@ routes.put(
 	AuthMiddleware.authenticate,
 	HandleUserMiddleware.handle,
 	UpdateTaskController.handle
+)
+
+// Tags
+routes.get(
+	'/tags',
+	AuthMiddleware.authenticate,
+	HandleUserMiddleware.handle,
+	GetAllTagsController.handle
 )
 
 export { routes }

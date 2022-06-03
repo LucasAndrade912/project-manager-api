@@ -7,8 +7,8 @@ export class GetAllTags {
 		this.repository = repository
 	}
 
-	async exec() {
-		const tags = await this.repository.findAllTags()
+	async exec(idUser: string) {
+		const tags = await this.repository.findAllTags(idUser)
 
 		return tags
 	}
