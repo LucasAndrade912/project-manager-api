@@ -1,7 +1,11 @@
-import { ITag } from '../../../core/entities/Tag/ITag'
+export interface TagFindData {
+  id: number
+  tag_name: string
+  color: { color_name: string }
+}
 
-export interface ITagRepository<T = ITag> {
-  createTag(tagName: string, idColor: number): Promise<T>
-  findAllTags(): Promise<T[]>
+export interface ITagRepository {
+  createTag(tagName: string, idColor: number): Promise<void>
+  findAllTags(idUser: string): Promise<TagFindData[]>
   deleteTag(id: number): Promise<void>
 }

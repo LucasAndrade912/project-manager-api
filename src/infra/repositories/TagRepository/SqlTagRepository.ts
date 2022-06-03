@@ -1,10 +1,9 @@
-import { Tag } from '@prisma/client'
 import { prisma } from '../prisma/prismaClient'
-import { ITagRepository } from './ITagRepository'
+import { ITagRepository, TagFindData } from './ITagRepository'
 
-export class SqlTagRepository implements ITagRepository<Tag> {
-	async createTag(tagName: string, idColor: number): Promise<Tag> {
-		const tag = await prisma.tag.create({
+export class SqlTagRepository implements ITagRepository {
+	async createTag(tagName: string, idColor: number) {
+		await prisma.tag.create({
 			data: {
 				tag_name: tagName,
 				color: {
@@ -14,21 +13,23 @@ export class SqlTagRepository implements ITagRepository<Tag> {
 				}
 			}
 		})
-
-		return tag
 	}
 
-	async findAllTags(): Promise<Tag[]> {
+	async findAllTags(idUser: string) {
 		const tags = await prisma.tag.findMany({
-			include: {
-				color: true
+			where: { user_id: idUser },
+			select: {
+				id: true,
+				tag_name: true,
+				color: true,
+				user_id: false
 			}
 		})
 
-		return tags
+		return tags as TagFindData[]
 	}
 
-	async deleteTag(id: number): Promise<void> {
+	async deleteTag(id: number) {
 		await prisma.tag.delete({
 			where: { id }
 		})
