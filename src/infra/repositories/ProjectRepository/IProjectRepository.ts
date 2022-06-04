@@ -38,7 +38,7 @@ export interface ProjectUpdateData {
 }
 
 export interface IProjectRepository {
-  createProject(data: ProjectCreateData, idUser: string): Promise<void>
+  createProject(data: ProjectCreateData, idUser: string): Promise<string>
   findAllProjects(idUser: string): Promise<ProjectFindData[]>
   findProjectById(idProject: string, idUser: string): Promise<ProjectFindData>
   updateProject(idProject: string, changes: ProjectUpdateData): Promise<void>

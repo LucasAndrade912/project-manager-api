@@ -25,11 +25,13 @@ export class CreateProject {
 			description: data.description
 		})
 
-		await this.repository.createProject({
+		const id = await this.repository.createProject({
 			title,
 			description,
 			status,
 			idTags: data.idTags
 		}, idUser)
+
+		return id
 	}
 }

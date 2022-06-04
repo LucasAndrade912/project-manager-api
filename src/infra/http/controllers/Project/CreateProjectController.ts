@@ -12,13 +12,13 @@ export class CreateProjectController {
 		const createProjectUseCase = new CreateProject(sqlProjectRepository)
 
 		try {
-			await createProjectUseCase.exec({
+			const id = await createProjectUseCase.exec({
 				title,
 				description,
 				idTags
 			}, userId)
 
-			return res.status(201).send()
+			return res.status(201).json(id)
 		} catch (err) {
 			console.log(err)
 			return res.status(500).send()

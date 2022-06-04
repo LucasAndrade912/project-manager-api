@@ -7,7 +7,7 @@ export class SqlProjectRepository implements IProjectRepository {
 			return { id: idTag }
 		})
 
-		await prisma.project.create({
+		const { id } = await prisma.project.create({
 			data: {
 				title: data.title,
 				description: data.description,
@@ -23,6 +23,8 @@ export class SqlProjectRepository implements IProjectRepository {
 				}
 			}
 		})
+
+		return id
 	}
   
 	async findAllProjects(idUser: string) {
