@@ -12,6 +12,7 @@ import { DeleteProjectController } from './controllers/Project/DeleteProjectCont
 import { UpdateTaskController } from './controllers/Task/UpdateTaskController'
 
 import { GetAllTagsController } from './controllers/Tag/GetAllTagsController'
+import { CreateTaskController } from './controllers/Task/CreateTaskController'
 
 const routes = Router()
 
@@ -52,6 +53,13 @@ routes.delete(
 )
 
 // Tasks
+routes.post(
+	'/tasks',
+	AuthMiddleware.authenticate,
+	HandleUserMiddleware.handle,
+	CreateTaskController.handle
+)
+
 routes.put(
 	'/tasks',
 	AuthMiddleware.authenticate,

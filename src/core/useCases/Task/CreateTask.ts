@@ -15,7 +15,7 @@ export class CreateTask {
 
 		const newTask = new Task({ task_name: taskName, finished: false })
 
-		const task = await this.repository.createTask(newTask, idProject)
+		const task = await this.repository.createTask(newTask.task_name, idProject)
 
 		return task
 	}

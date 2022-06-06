@@ -3,6 +3,7 @@ import { ITaskRepository } from './ITaskRepository'
 
 export class SqlTaskRepository implements ITaskRepository {
 	async createTask(taskName: string, idProject: string) {
+		console.log(taskName)
 		await prisma.task.create({
 			data: {
 				task_name: taskName,
