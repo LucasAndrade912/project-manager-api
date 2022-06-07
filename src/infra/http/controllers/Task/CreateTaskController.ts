@@ -9,9 +9,9 @@ export class CreateTaskController {
 		const createTaskUseCase = new CreateTask(sqlTaskRepository)
 
 		try {
-			await createTaskUseCase.exec(taskName, idProject)
+			const taskId = await createTaskUseCase.exec(taskName, idProject)
 
-			return res.status(201).send()
+			return res.status(201).json(taskId)
 		} catch (err) {
 			console.log(err)
 			res.status(500).send()
