@@ -14,6 +14,8 @@ import { UpdateTaskController } from './controllers/Task/UpdateTaskController'
 import { GetAllTagsController } from './controllers/Tag/GetAllTagsController'
 import { CreateTaskController } from './controllers/Task/CreateTaskController'
 
+import { GetAllColorsController } from './controllers/Color/GetAllColorsController'
+
 const routes = Router()
 
 // Projects
@@ -74,5 +76,8 @@ routes.get(
 	HandleUserMiddleware.handle,
 	GetAllTagsController.handle
 )
+
+// Colors
+routes.get('/colors', GetAllColorsController.handle)
 
 export { routes }
