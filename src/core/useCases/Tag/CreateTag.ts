@@ -1,6 +1,5 @@
 import { ITagRepository } from '../../../infra/repositories/TagRepository/ITagRepository'
 import { Tag } from '../../entities/Tag'
-import { ITag } from '../../entities/Tag/ITag'
 
 export class CreateTag {
 	private repository: ITagRepository
@@ -9,14 +8,15 @@ export class CreateTag {
 		this.repository = repository
 	}
 
-	async exec(newTag: ITag) {
-		if (!newTag.tag_name || !newTag.id_color) {
+	async exec(tagName: string, idColor: number, idUser: string) {
+		console.log(tagName, idColor)
+		if (!tagName || !idColor) {
 			throw new Error('TagName and IdColor fields must be filled in')
 		}
 
-		const { tag_name, id_color } = new Tag(newTag)
+		const { tag_name, id_color } = new Tag({ tag_name: tagName, id_color: idColor })
 
-		const tag = await this.repository.createTag(tag_name, id_color)
+		const tag = await this.repository.createTag(tag_name, id_color, idUser)
 
 		return tag
 	}
