@@ -10,9 +10,10 @@ import { UpdateProjectController } from './controllers/Project/UpdateProjectCont
 import { DeleteProjectController } from './controllers/Project/DeleteProjectController'
 
 import { UpdateTaskController } from './controllers/Task/UpdateTaskController'
+import { CreateTaskController } from './controllers/Task/CreateTaskController'
 
 import { GetAllTagsController } from './controllers/Tag/GetAllTagsController'
-import { CreateTaskController } from './controllers/Task/CreateTaskController'
+import { CreateTagController } from './controllers/Tag/CreateTagController'
 
 import { GetAllColorsController } from './controllers/Color/GetAllColorsController'
 
@@ -75,6 +76,13 @@ routes.get(
 	AuthMiddleware.authenticate,
 	HandleUserMiddleware.handle,
 	GetAllTagsController.handle
+)
+
+routes.post(
+	'/tags',
+	AuthMiddleware.authenticate,
+	HandleUserMiddleware.handle,
+	CreateTagController.handle
 )
 
 // Colors
