@@ -2,17 +2,24 @@ import { prisma } from '../prisma/prismaClient'
 import { ITagRepository, TagFindData } from './ITagRepository'
 
 export class SqlTagRepository implements ITagRepository {
-	async createTag(tagName: string, idColor: number) {
-		await prisma.tag.create({
+	async createTag(tagName: string, idColor: number, idUser: string) {
+		const { id } = await prisma.tag.create({
 			data: {
 				tag_name: tagName,
 				color: {
 					connect: {
 						id: idColor
 					}
+				},
+				user: {
+					connect: {
+						id: idUser
+					}
 				}
 			}
 		})
+
+		return id
 	}
 
 	async findAllTags(idUser: string) {

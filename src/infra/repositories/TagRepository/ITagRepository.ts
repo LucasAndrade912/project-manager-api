@@ -5,7 +5,7 @@ export interface TagFindData {
 }
 
 export interface ITagRepository {
-  createTag(tagName: string, idColor: number): Promise<void>
+  createTag(tagName: string, idColor: number, idUser: string): Promise<number>
   findAllTags(idUser: string): Promise<TagFindData[]>
   deleteTag(id: number): Promise<void>
 }
