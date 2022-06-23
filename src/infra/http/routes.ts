@@ -19,6 +19,8 @@ import { GetAllColorsController } from './controllers/Color/GetAllColorsControll
 
 const routes = Router()
 
+routes.get('/', (req, res) => res.json({ message: 'Ok' }))
+
 // Projects
 routes.get(
 	'/projects',
