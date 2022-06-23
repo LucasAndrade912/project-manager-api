@@ -1,9 +1,9 @@
 import express from 'express'
 import cors from 'cors'
 import { routes } from './routes'
-import { initiFirebaseApp } from '../firebase'
+import { initFirebaseApp } from '../firebase'
 
-initiFirebaseApp()
+initFirebaseApp()
 
 const app = express()
 const port = process.env.PORT || 8888
