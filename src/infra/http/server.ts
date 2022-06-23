@@ -6,7 +6,7 @@ import { initiFirebaseApp } from '../firebase'
 initiFirebaseApp()
 
 const app = express()
-const port = 8888 || process.env.PORT
+const port = process.env.PORT || 8888
 
 app.use(cors())
 app.use(express.json())
