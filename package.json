@@ -6,9 +6,9 @@
   "author": "Lucas Andrade <lucasantos.dev@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node dist/infra/http/server.js",
+    "start": "node dist/http/server.js",
     "build": "tsc",
-    "server": "nodemon --exec ts-node --transpileOnly src/infra/http/server.ts",
+    "server": "nodemon --exec ts-node --transpileOnly src/http/server.ts",
     "test": "jest --verbose --watchAll"
   },
   "devDependencies": {
